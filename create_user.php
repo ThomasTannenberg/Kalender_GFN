@@ -2,18 +2,18 @@
 include 'db.php';
 $dbh = connectToDatabase();
 
-
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $username = $_POST['username'];
+    $Benutzername = $_POST['Benutzername'];
 
-    $passwordHash = password_hash($_POST['password'], PASSWORD_DEFAULT);
+    $passwordHash = password_hash($_POST['Passwort'], PASSWORD_DEFAULT);
+}
 
     try {
 
-        $stmt = $dbh->prepare("INSERT INTO benutzer (username, passwort, email) VALUES (:username, :passwort, :email)");
-        $stmt->bindParam(':username', $username);
-        $stmt->bindParam(':passwort', $passwordHash);
-        $stmt->bindParam(':email', $_POST['email']);
+        $stmt = $dbh->prepare("INSERT INTO Benutzer (Benutzername, Passwort, Email) VALUES (:Benutzername, :Passwort, :Email)");
+        $stmt->bindParam(':Benutzername', $Benutzername);
+        $stmt->bindParam(':Passwort', $passwordHash);
+        $stmt->bindParam(':Email', $_POST['Email']);
         $stmt->execute();
 
 // Weiterleiten
@@ -24,4 +24,4 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     closeDatabaseConnection($dbh);
 
-}
+
